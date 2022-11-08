@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- normalize -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <!-- fil  styling -->
+  <link rel="stylesheet" href="css/main.css">
+    <!-- framwork -->
+    <link rel="stylesheet" href="css/framwork.css">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="css/all.min.css">
+  <!-- font type -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;400;500;600;700;900&display=swap" rel="stylesheet">
+  <title>صلاتي</title>
+</head>
+<body>
+
+  <!-- nav page -->
+  <nav class="nav_page">
+    <div class="ctn">
+      <h1 class="title_1">صلاتي</h1>      
+      <i class="fa-solid fa-star-and-crescent"></i>
+    </div>
+  </nav>
+  <!-- nav page -->  
+
+  <!-- menu -->
+  <div class="menu">
+    <div class="ctn">
+      <ul>
+        <li class="t_n active_1">
+          موفيت الصلاة
+        </li>
+        <li class="t_n">
+          الادكار
+        </li>
+        <li class="t_n">
+          القران الكريم
+        </li>
+        <li class="t_n">
+          القبلاة
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- menu -->
+
+  <!-- contents -->
+  <div class="contents">
+
+    <!-- load -->
+    <div class="load" style="display: none;">
+      <i class="fa-solid fa-repeat"></i>
+    </div>
+    <!-- load -->
+
+    <!-- error -->
+    <div class="error" style="display: none;">
+      <h1 class="title_1">تعذر علينا إكمال طلبك</h1>
+      <button class="t_2">يرجى محاولة إعادة تحميل الصفحة</button>
+    </div>
+    <!-- error -->
+
+    <!-- set location -->
+    <div class="set_location" style="display: none;">
+      <div class="ctn">
+        <h1 class="t_3">المرجو تحديد مكان تواجدك</h1>
+        <!-- steps -->
+        <div class="steps">
+          <div class="step_n">
+            <div class="circle t_n">1</div>
+          </div>
+          <div class="step_n">
+            <div class="line"></div>            
+            <div class="circle t_n">2</div>
+          </div>
+          <div class="step_n">
+            <div class="line"></div>            
+            <div class="circle t_n">3</div>
+          </div>
+        </div>
+        <!-- steps -->
+        <!-- options -->
+        <div class="options">
+          <div class="option_n">
+            <select class="t_2" id="input_list_country" name="country">
+
+            </select>
+            <div class="load_op">
+              <i class="fa-solid fa-repeat t_2"></i>
+            </div>
+          </div>
+          <div class="option_n">
+            <select class="t_2" id="input_list_side" name="side">
+
+            </select>
+            <div class="load_op">
+              <i class="fa-solid fa-repeat t_2"></i>
+            </div>
+          </div>
+          <div class="option_n">
+            <select class="t_2" id="input_list_city" name="city">
+
+            </select>
+            <div class="load_op">
+              <i class="fa-solid fa-repeat t_2"></i>
+            </div>
+          </div>
+        </div>
+        <!-- options -->
+        <!-- button -->
+        <button class="btn t_2">
+          التالي
+        </button>
+        <!-- button -->        
+      </div>
+    </div>
+    <!-- set location -->
+    
+    <!-- prayer timings -->
+    <div class="prayer_timings" style="display: none;">
+      <!-- date -->
+      <div class="date">
+        <div class="ctn">
+          <div class="t_l">
+            <p class="t_2 time">
+              <span id="month">00</span> -
+              <span id="day">00</span> -
+              <span id="year">0000</span>
+            </p>
+            <p class="t_2 local">
+              <span id="city">city</span>&nbsp;/&nbsp;
+              <span id="country">country</span>
+            </p>
+          </div>
+          <button class="t_n"><span>تعديل</span> <i class="fa-solid fa-bars"></i></button>
+        </div>
+      </div>
+      <!-- date -->
+      <!-- prayer -->
+      <div class="prayer">
+        <div class="ctn">
+          <button class="left">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <ul>
+            <li class="t_2">
+              <span>الفجر</span><span>00:00 (+00)</span>
+            </li>
+            <li class="t_2">
+              <span>الضحى</span><span>00:00 (+00)</span>
+            </li>            
+            <li class="t_2">
+              <span>الضهر</span><span>00:00 (+00)</span>
+            </li>
+            <li class="t_2">
+              <span>العسر</span><span>00:00 (+00)</span>
+            </li>            
+            <li class="t_2">
+              <span>المغرب</span><span>00:00 (+00)</span>
+            </li>  
+            <li class="t_2">
+              <span>العشاء</span><span>00:00 (+00)</span>
+            </li>  
+          </ul>
+          <button class="right">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <!-- prayer -->
+      <!-- edite location time -->
+      <div class="edite_location_time">
+          <button class="btn_x">
+            <i class="fa-solid fa-x"></i>
+          </button>
+          <h1 class="title_3">
+            تعديل الوقت والتاريخ
+          </h1>
+      </div>
+      <!-- edite location time -->
+      <!-- plack_black -->
+      <section class="plack_black"></section>
+      <!-- plack_black -->
+    </div>
+    <!-- prayer timings -->
+  </div> 
+  <!-- contents -->
+
+  <!-- fill js -->
+  <script src="js/ts/dist/main.js"></script>
+</body>
+</html>

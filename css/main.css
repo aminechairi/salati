@@ -1,0 +1,472 @@
+/* :root {
+
+} */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+  color: initial;
+  display: block;
+}
+a:hover {
+  cursor: default;
+}
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+  color: var(--colo-white);  
+} 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+} li {
+  margin: 0;
+  padding: 0; 
+}
+button {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+/* start container */
+.ctn {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+} 
+/*s end container */
+
+/* start media query  */
+/* Small */
+@media (min-width: 768px) {
+  .ctn {
+      width: 750px;
+      /* background-color: burlywood; */
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .ctn {
+      width: 970px;
+      /* background-color: brown; */
+  }
+}
+  /* Large */
+@media (min-width: 1200px) {
+  .ctn {
+      width: 1170px;
+      /* background-color: blue; */
+  }
+}
+/* end media query */
+
+
+
+
+
+
+/* nav page */
+.nav_page {
+  padding: 20px 0px;
+  background-color: #373747;
+}
+.nav_page .ctn {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 15px;
+}
+.nav_page .ctn i {
+  font-size: 32px;
+  color: #fff;
+}
+.nav_page .ctn h1 {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+/* nav page */
+
+
+
+
+
+
+/* menu */
+.menu {
+  background-color: #232635;
+}
+.menu .ctn ul {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  overflow-y: auto;
+  column-gap: 20px;
+}
+.menu .ctn ul > :first-child {
+  background-color: #373747;
+}
+.menu .ctn ul::-webkit-scrollbar {
+  display: none;
+}
+.menu .ctn ul li {
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 15px;
+  transition: color 0.3s;
+  flex-shrink: 0;
+}
+.menu .ctn ul li:hover {
+  cursor: pointer;
+  background-color: #373747;
+  color: #fff;
+}
+/* menu */
+
+
+
+
+
+
+/* contents */
+
+/* load */
+.load {
+  width: 100%;
+  height: calc(100vh - 76.8px - 70px);
+  background-color:#373747;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.load i {
+  font-size: 50px;
+  animation: load 1s infinite ease-in-out;
+  color: #fff;
+}
+@keyframes load {
+  0% {
+    transform: rotateZ(0deg);
+  } 100% {
+    transform: rotateZ(360deg);
+  }
+}
+/* load */
+
+/* error */
+.error {
+  width: 100%;
+  height: calc(100vh - 76.8px - 70px);
+  background-color:#373747;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.error h1 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+.error button {
+  color: #fff;
+  margin-bottom: 10px;
+}
+/* error */
+
+/* set location */
+.set_location {
+  background-color:#373747;
+}
+.set_location .ctn h1 {
+  color: #fff;
+  padding: 20px 0px;
+}
+
+/* steps */
+.set_location .ctn .steps {
+  display: flex;
+  padding: 20px 0px;
+  overflow-x: scroll;
+}
+.set_location .ctn .steps::-webkit-scrollbar {
+  display: none;
+}
+.set_location .ctn .steps .step_n {
+  display: flex;
+  align-items: center;
+}
+.set_location .ctn .steps .step_n .circle {
+  color:#232635;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.set_location .ctn .steps .step_n .line {
+  width: 40px;
+  height: 6px;
+  background-color: #fff;
+}
+@media (min-width: 768px) {
+  .set_location .ctn .steps .step_n .line {
+    width: 200px;
+  }
+}
+/* steps */
+
+/* options */
+.set_location  {
+  min-height: calc(100vh - 76.8px - 70px);
+  padding-bottom: 20px;
+}
+.set_location .ctn .options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: center;
+  gap: 40px;
+  padding: 20px 0px 40px;
+}
+.set_location .ctn .options .option_n .load_op {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #232635;
+  height: 47px;
+  border-radius: 14px;
+}
+.set_location .ctn .options .option_n .load_op i {
+  color: #fff;
+  animation: load 1s infinite ease-in-out;
+}
+@keyframes load {
+  0% {
+    transform: rotateZ(0deg);
+  } 100% {
+    transform: rotateZ(360deg);
+  }
+}
+.set_location .ctn .options .option_n > select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  color: #232635;
+  border-radius: 14px;
+}
+.set_location .ctn .options > :nth-child(1) > :nth-child(1)  {
+  display: none;
+}
+.set_location .ctn .options > :nth-child(1) > :nth-child(2)  {
+  display: flex;
+}
+.set_location .ctn .options > :nth-child(2) > :nth-child(1)  {
+  display: none;
+}
+.set_location .ctn .options > :nth-child(2) > :nth-child(2)  {
+  display: none;
+}
+.set_location .ctn .options > :nth-child(3) > :nth-child(1)  {
+  display: none;
+}
+.set_location .ctn .options > :nth-child(3) > :nth-child(2)  {
+  display: none;
+}
+.set_location .ctn .btn {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  color: #fff;
+  padding: 10px;
+  background-color: #232635;
+  border-radius: 14px;
+  display: none;
+}
+.set_location .ctn .btn:hover {
+  cursor: pointer;
+}
+/* options */
+
+/* set location */
+
+
+/* prayer timings */
+/* date */
+.contents .prayer_timings .date {
+  padding: 20px 0px;
+  background-color: #373747;
+}
+.contents .prayer_timings .date .ctn  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contents .prayer_timings .date .ctn .t_l {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+  row-gap: 10px;
+}
+@media (min-width: 768px) {
+  .contents .prayer_timings .date .ctn .t_l {
+    text-align: start;
+    row-gap: 0px;
+  }
+}
+.contents .prayer_timings .date .ctn button {
+  background-color:#232635;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 15px;
+  height: fit-content;
+  transition: color 0.3s;
+}
+.contents .prayer_timings .date .ctn button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: #232635;
+}
+/* date */
+/* prayer */
+.contents .prayer_timings .prayer {
+  background-color: #232635;
+}
+.contents .prayer_timings .prayer .ctn {
+  padding: 40px 15px;
+  position: relative;
+}
+.contents .prayer_timings .prayer .ctn:hover .left {
+  display: block;
+}
+.contents .prayer_timings .prayer .ctn:hover .right {
+  display: block;
+}
+.contents .prayer_timings .prayer .ctn .left {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  padding: 10px;
+  background-color: #fff;
+  color: #232635;
+  border-radius: 14px;
+  transition: color 0.3s;
+  display: none;
+}
+.contents .prayer_timings .prayer .ctn .left:hover {
+  color: #fff;
+  background-color: #373747;
+}
+@media (min-width: 768px) {
+  .contents .prayer_timings .prayer .ctn .left {
+    left: 0px;
+  }
+}
+.contents .prayer_timings .prayer .ctn .right {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  padding: 10px;
+  background-color: #fff;
+  color: #232635;
+  border-radius: 14px;
+  transition: color 0.3s;
+  display: none;
+}
+.contents .prayer_timings .prayer .ctn .right:hover {
+  color: #fff;
+  background-color: #373747;
+}
+@media (min-width: 768px) {
+  .contents .prayer_timings .prayer .ctn .right {
+    right: 0px;
+  }
+}
+.contents .prayer_timings .prayer .ctn ul {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: center;
+  gap: 40px;
+}
+.contents .prayer_timings .prayer .ctn ul li {
+  background-color: #373747;
+  color: #fff;
+  padding: 40px 0px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  transition: color 0.3s;
+}
+.contents .prayer_timings .prayer .ctn ul li:hover {
+  background-color:#232635;
+  outline: 1px solid #fff;
+}
+.contents .prayer_timings .prayer .ctn ul li span {
+  display: block;
+}
+/* prayer */
+
+/* edite location time */
+.prayer_timings .edite_location_time {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #373747;
+  border-top-left-radius: 40px;
+  padding: 40px;
+  transform: translateX(1000%);
+  transition-property: all;
+  transition-duration: 0.3s;
+  z-index: 101;
+}
+@media (min-width: 768px) {
+  .prayer_timings .edite_location_time {
+    width: 75%;
+  }
+}
+.prayer_timings .edite_location_time .btn_x {
+  display: block;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+.prayer_timings .edite_location_time .btn_x i {
+  font-size: 22px;
+  color: #fff;
+}
+.prayer_timings .edite_location_time .btn_x i:hover {
+  cursor: pointer;
+}
+.prayer_timings .edite_location_time h1 {
+  color: #fff;
+}
+/* edite location time */
+
+/* prayer timings */
+
+/* contents */
