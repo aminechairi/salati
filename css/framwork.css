@@ -20,18 +20,3 @@
 .t_3 {
   font-size: 26px;
 }
-
-
-
-
-
-.plack_black {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: #0000007d;
-  z-index: -1;
-  transition: all 0.1s;
-}

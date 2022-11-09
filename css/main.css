@@ -201,10 +201,6 @@ button {
 .set_location .ctn .steps {
   display: flex;
   padding: 20px 0px;
-  overflow-x: scroll;
-}
-.set_location .ctn .steps::-webkit-scrollbar {
-  display: none;
 }
 .set_location .ctn .steps .step_n {
   display: flex;
@@ -221,7 +217,7 @@ button {
   align-items: center;
 }
 .set_location .ctn .steps .step_n .line {
-  width: 40px;
+  width: 100px;
   height: 6px;
   background-color: #fff;
 }
@@ -440,7 +436,7 @@ button {
   background-color: #373747;
   border-top-left-radius: 40px;
   padding: 40px;
-  transform: translateX(1000%);
+  transform: translateX(100%);
   transition-property: all;
   transition-duration: 0.3s;
   z-index: 101;
@@ -464,6 +460,16 @@ button {
 }
 .prayer_timings .edite_location_time h1 {
   color: #fff;
+}
+.prayer_timings .plack_black {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #0000007d;
+  z-index: -1;
+  transition: all 0.1s;
 }
 /* edite location time */
 
