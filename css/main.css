@@ -460,6 +460,28 @@ button {
 }
 .prayer_timings .edite_location_time h1 {
   color: #fff;
+  margin-bottom: 20px;
+}
+.prayer_timings .edite_location_time .tabs .tab {
+  color: #fff;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #fff;
+}
+.prayer_timings .edite_location_time .tabs .tab button {
+  background-color: #232635;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 15px;
+  height: fit-content;
+  transition: color 0.3s;
+}
+.prayer_timings .edite_location_time .tabs .tab button:hover {
+  color: #232635;
+  background-color: #fff;
+  cursor: pointer;
 }
 .prayer_timings .plack_black {
   position: fixed;

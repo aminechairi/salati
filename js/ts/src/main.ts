@@ -1,3 +1,4 @@
+// components 
 let components = {
   conntent: document.querySelectorAll(`.contents`)[0] as HTMLElement,
   load: `
@@ -135,6 +136,11 @@ let components = {
         <h1 class="title_3">
         تعديل
         </h1>
+        <div class="tabs">
+        <div class="tab">
+          <p class="t_2">تغير مكان توتجدك</p> <button class="t_n">تغير</button>
+        </div>
+      </div>
     </div>
     <!-- edite location time -->
     <!-- plack_black -->
@@ -146,134 +152,15 @@ let components = {
   ,
 }
 
-// localStorage.clear()
-function prayer_tiling() {
-
-  // set_location
-  async function set_location() {
+// set location
+async function set_location() {
 
     try {
 
       if (localStorage.getItem(`country`) && localStorage.getItem(`city`)) {
 
-        // diplay prayer timing function
-        async function display_prayer_timin() {
-
-          try {
-            
-            // prayer timing data
-            let date = await new Date(),
-              year = date.getFullYear(),
-              month = date.getMonth(),
-              day = date.getDate();
-            let address = await {
-              country: localStorage.getItem(`country`),
-              city: localStorage.getItem(`city`),
-            }
-            let method = 4;
-            
-            // diplay load
-            components.conntent.innerHTML = await components.load;
-    
-            // get prayer timing
-            let url = await `http://api.aladhan.com/v1/calendarByAddress?address=${address.city},${address.country}&method=${method}&month=${month}&year=${year}`;
-            let get_prayer_timing = await fetch(url);
-            let prayer_tiling_date = await get_prayer_timing.json();
-            
-            // diplay prayer timing
-            components.conntent.innerHTML = await components.prayer_timing;
-    
-            // data timi
-            let date_time = await {
-              month: document.getElementById(`month`) as HTMLElement,
-              day: document.getElementById(`day`) as HTMLElement,
-              year: document.getElementById(`year`) as HTMLElement,
-              city: document.getElementById(`city`) as HTMLElement,
-              country: document.getElementById(`country`) as HTMLElement,
-              date_timing: () => {
-    
-                date_time.month.innerHTML = `${month + 1}`;
-                date_time.day.innerHTML = `${day}`;
-                date_time.year.innerHTML = `${year}`;
-    
-                date_time.city.innerHTML = `${address.city}`;
-                date_time.country.innerHTML = `${address.country}`;            
-              }
-            }
-            await date_time.date_timing();
-    
-            // display prayer timing data
-            let prayer_timing_el = await {
-              fajr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[0] as HTMLElement,
-              sunrise: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[1] as HTMLElement,
-              dhuhr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[2] as HTMLElement,
-              asr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[3] as HTMLElement,
-              maghrib: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[4] as HTMLElement,
-              isha: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[5] as HTMLElement,
-              number_index: day - 1,
-            }
-            prayer_timing_el.fajr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-            prayer_timing_el.sunrise.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-            prayer_timing_el.dhuhr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-            prayer_timing_el.asr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-            prayer_timing_el.maghrib.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-            prayer_timing_el.isha.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
-            
-            // switch prayer timing
-            let btns = {
-              right: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .right`)[0] as HTMLElement,
-              left: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .left`)[0] as HTMLElement,
-            }
-
-            // right
-            btns.right.addEventListener(`click`, () => {
-              let max = prayer_tiling_date.data.length -1;
-              if (prayer_timing_el.number_index < max) {
-                prayer_timing_el.number_index += 1;
-
-                prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-                prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-                prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-                prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-                prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-                prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
-
-                date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
-
-              }
-            })
-
-            // left
-            btns.left.addEventListener(`click`, () => {
-              let min = 0;
-              if (prayer_timing_el.number_index > min) {
-                prayer_timing_el.number_index -= 1;
-
-                prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-                prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-                prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-                prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-                prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-                prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
-
-                date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
-
-              }
-            })
-
-            await edite_prayer_timing();
-
-            
-
-          } catch (error) {
-            components.conntent.innerHTML = components.error;
-            console.log(
-              error
-            );
-          }
-
-        }
-        display_prayer_timin();
+        // diplay prayer timing
+        display_prayer_timin(`${localStorage.getItem(`country`)}`, `${localStorage.getItem(`city`)}`);
 
       } else {
         // data_user
@@ -455,120 +342,10 @@ function prayer_tiling() {
 
         })
 
-        // diplay prayer timing function
-        async function display_prayer_timin() {
-
-          // prayer timing data
-          let date = await new Date(),
-            year = date.getFullYear(),
-            month = date.getMonth(),
-            day = date.getDate();
-          let address = await {
-            country: data_user.country,
-            city: data_user.city,
-          }
-          let method = 4;
-          
-          // diplay load
-          components.conntent.innerHTML = await components.load;
-
-          // get prayer timing
-          let url = await `http://api.aladhan.com/v1/calendarByAddress?address=${address.city},${address.country}&method=${method}&month=${month}&year=${year}`;
-          let get_prayer_timing = await fetch(url);
-          let prayer_tiling_date = await get_prayer_timing.json();
-          
-          // diplay prayer timing
-          components.conntent.innerHTML = await components.prayer_timing;
-
-          // data timi
-          let date_time = await {
-            month: document.getElementById(`month`) as HTMLElement,
-            day: document.getElementById(`day`) as HTMLElement,
-            year: document.getElementById(`year`) as HTMLElement,
-            city: document.getElementById(`city`) as HTMLElement,
-            country: document.getElementById(`country`) as HTMLElement,
-            date_timing: () => {
-
-              date_time.month.innerHTML = `${month + 1}`;
-              date_time.day.innerHTML = `${day}`;
-              date_time.year.innerHTML = `${year}`;
-
-              date_time.city.innerHTML = `${address.city}`;
-              date_time.country.innerHTML = `${address.country}`;            
-            }
-          }
-          await date_time.date_timing();
-
-          // display prayer timing data
-          let prayer_timing_el = await {
-            fajr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[0] as HTMLElement,
-            sunrise: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[1] as HTMLElement,
-            dhuhr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[2] as HTMLElement,
-            asr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[3] as HTMLElement,
-            maghrib: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[4] as HTMLElement,
-            isha: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[5] as HTMLElement,
-            number_index: day - 1,
-          }
-          prayer_timing_el.fajr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-          prayer_timing_el.sunrise.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-          prayer_timing_el.dhuhr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-          prayer_timing_el.asr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-          prayer_timing_el.maghrib.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-          prayer_timing_el.isha.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
-
-          // switch prayer timing
-          let btns = {
-            right: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .right`)[0] as HTMLElement,
-            left: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .left`)[0] as HTMLElement,
-          }
-
-          // right
-          btns.right.addEventListener(`click`, () => {
-
-            let max = prayer_tiling_date.data.length -1;
-            if (prayer_timing_el.number_index < max) {
-              prayer_timing_el.number_index += 1;
-
-              prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-              prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-              prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-              prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-              prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-              prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
-
-              date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
-
-            }
-
-          })
-
-          // left
-          btns.left.addEventListener(`click`, () => {
-
-            let min = 0;
-            if (prayer_timing_el.number_index > min) {
-              prayer_timing_el.number_index -= 1;
-
-              prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-              prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-              prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-              prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-              prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-              prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
-
-              date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
-  
-            }
-
-          })
-
-          await edite_prayer_timing();
-
-
-
-        }
-
-        submit_button.addEventListener(`click`, display_prayer_timin);
+        // diplay prayer timing 
+        submit_button.addEventListener(`click`, () => {
+          display_prayer_timin(`${data_user.country}`, `${data_user.city}`);
+        });
       }
 
     } catch (error: any) {
@@ -578,12 +355,120 @@ function prayer_tiling() {
       );
     }
 
+}
+
+// diplay prayer timing function
+async function display_prayer_timin(countrie: string, city: string) {
+
+  // prayer timing data
+  let date = await new Date(),
+    year = date.getFullYear(),
+    month = date.getMonth(),
+    day = date.getDate();
+  let address = await {
+    country: countrie,
+    city: city,
   }
-  set_location();
+  let method = 4;
+  
+  // diplay load
+  components.conntent.innerHTML = await components.load;
+
+  // get prayer timing
+  let url = await `http://api.aladhan.com/v1/calendarByAddress?address=${address.city},${address.country}&method=${method}&month=${month}&year=${year}`;
+  let get_prayer_timing = await fetch(url);
+  let prayer_tiling_date = await get_prayer_timing.json();
+  
+  // diplay prayer timing
+  components.conntent.innerHTML = await components.prayer_timing;
+
+  // data timi
+  let date_time = await {
+    month: document.getElementById(`month`) as HTMLElement,
+    day: document.getElementById(`day`) as HTMLElement,
+    year: document.getElementById(`year`) as HTMLElement,
+    city: document.getElementById(`city`) as HTMLElement,
+    country: document.getElementById(`country`) as HTMLElement,
+    date_timing: () => {
+
+      date_time.month.innerHTML = `${month + 1}`;
+      date_time.day.innerHTML = `${day}`;
+      date_time.year.innerHTML = `${year}`;
+
+      date_time.city.innerHTML = `${address.city}`;
+      date_time.country.innerHTML = `${address.country}`;            
+    }
+  }
+  await date_time.date_timing();
+
+  // display prayer timing data
+  let prayer_timing_el = await {
+    fajr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[0] as HTMLElement,
+    sunrise: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[1] as HTMLElement,
+    dhuhr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[2] as HTMLElement,
+    asr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[3] as HTMLElement,
+    maghrib: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[4] as HTMLElement,
+    isha: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[5] as HTMLElement,
+    number_index: day - 1,
+  }
+  prayer_timing_el.fajr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
+  prayer_timing_el.sunrise.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
+  prayer_timing_el.dhuhr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
+  prayer_timing_el.asr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
+  prayer_timing_el.maghrib.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
+  prayer_timing_el.isha.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
+
+  // switch prayer timing
+  let btns = {
+    right: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .right`)[0] as HTMLElement,
+    left: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .left`)[0] as HTMLElement,
+  }
+
+  // right
+  btns.right.addEventListener(`click`, () => {
+
+    let max = prayer_tiling_date.data.length -1;
+    if (prayer_timing_el.number_index < max) {
+      prayer_timing_el.number_index += 1;
+
+      prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
+      prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
+      prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
+      prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
+      prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
+      prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
+
+      date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
+
+    }
+
+  })
+
+  // left
+  btns.left.addEventListener(`click`, () => {
+
+    let min = 0;
+    if (prayer_timing_el.number_index > min) {
+      prayer_timing_el.number_index -= 1;
+
+      prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
+      prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
+      prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
+      prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
+      prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
+      prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
+
+      date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
+
+    }
+
+  })
+
+  await edite_prayer_timing();
+
 
 
 }
-prayer_tiling();
 
 // edite_prayer_timing
 function edite_prayer_timing() {
@@ -609,3 +494,14 @@ function edite_prayer_timing() {
   })
 
 }
+
+// prayer_tiling function
+function prayer_tiling() {
+
+  // set locatuion
+  set_location();
+
+}
+prayer_tiling();
+
+// localStorage.clear()
