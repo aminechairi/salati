@@ -185,6 +185,12 @@ button {
 .error button {
   color: #fff;
   margin-bottom: 10px;
+  color: blue;
+  transition: all 0.3;
+}
+.error button:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 /* error */
 
@@ -314,6 +320,14 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+@media (min-width: 768px) {
+  .contents .prayer_timings .date .ctn {
+    flex-direction: row;
+    gap: 0px;
+  }
 }
 .contents .prayer_timings .date .ctn .t_l {
   display: flex;
@@ -321,6 +335,7 @@ button {
   color: #fff;
   text-align: center;
   row-gap: 10px;
+  line-height: 30px;
 }
 @media (min-width: 768px) {
   .contents .prayer_timings .date .ctn .t_l {

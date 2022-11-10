@@ -152,7 +152,7 @@ let components = {
   ,
 }
 
-// set location
+// set location function
 async function set_location() {
 
     try {
@@ -237,97 +237,124 @@ async function set_location() {
 
         // get sides function
         async function get_sides() {
-          
-          // step 2
-          steps.step_2.line.style.backgroundColor = await `#fff`;
-          steps.step_2.circle.style.backgroundColor = await `#fff`;
-          steps.step_2.circle.style.color = await `#232635`;
 
-          // step 3
-          steps.step_3.line.style.backgroundColor = await `#fff`;
-          steps.step_3.circle.style.backgroundColor = await `#fff`;
-          steps.step_3.circle.style.color = await `#232635`;
+          try {
+            
+            // step 2
+            steps.step_2.line.style.backgroundColor = await `#fff`;
+            steps.step_2.circle.style.backgroundColor = await `#fff`;
+            steps.step_2.circle.style.color = await `#232635`;
 
-          // display button submit
-          submit_button.style.display = await `none`;
+            // step 3
+            steps.step_3.line.style.backgroundColor = await `#fff`;
+            steps.step_3.circle.style.backgroundColor = await `#fff`;
+            steps.step_3.circle.style.color = await `#232635`;
 
-          // data entry user
-          data_user.country = await options.countrys.input.value;
-          data_user.side = await ``;
-          data_user.city = await ``;
-          await localStorage.setItem(`country`, `${options.countrys.input.value}`);
+            // display button submit
+            submit_button.style.display = await `none`;
 
-          // load sides
-          options.sides.load.style.display = await `flex`;
-          options.sides.input.style.display = await `none`;
-          options.citys.load.style.display = await `none`;
-          options.citys.input.style.display = await `none`;
+            // data entry user
+            data_user.country = await options.countrys.input.value;
+            data_user.side = await ``;
+            data_user.city = await ``;
+            await localStorage.setItem(`country`, `${options.countrys.input.value}`);
 
-          // get side
-          let get_sides = await fetch(`https://www.universal-tutorial.com/api/states/${data_user.country}`, {
-            headers: {
-              "Authorization": "Bearer " + token.auth_token,
-              "Accept": "application/json"
+            // load sides
+            options.sides.load.style.display = await `flex`;
+            options.sides.input.style.display = await `none`;
+            options.citys.load.style.display = await `none`;
+            options.citys.input.style.display = await `none`;
+
+            // get side
+            let get_sides = await fetch(`https://www.universal-tutorial.com/api/states/${data_user.country}`, {
+              headers: {
+                "Authorization": "Bearer " + token.auth_token,
+                "Accept": "application/json"
+              }
+            })
+            let sides_data = await get_sides.json();
+
+            // display sides_data
+            options.sides.input.innerHTML = await `<option>select side</option>`;
+            for (let i = 0; i < sides_data.length; i++) {
+              options.sides.input.innerHTML += await `<option value="${sides_data[i].state_name}">${sides_data[i].state_name}</option>`;
             }
-          })
-          let sides_data = await get_sides.json();
+            options.sides.load.style.display = await `none`;
+            options.sides.input.style.display = await `block`;
 
-          // display sides_data
-          options.sides.input.innerHTML = await `<option>select side</option>`;
-          for (let i = 0; i < sides_data.length; i++) {
-            options.sides.input.innerHTML += await `<option value="${sides_data[i].state_name}">${sides_data[i].state_name}</option>`;
+            // step 2 active
+            steps.step_2.line.style.backgroundColor = `#232635`;
+            steps.step_2.circle.style.backgroundColor = `#232635`;
+            steps.step_2.circle.style.color = `#fff`;
+
+          } catch (error) {
+            components.conntent.innerHTML = components.error;
+            console.log(
+              error
+            );
+            let btn = document.querySelectorAll(`.error button`)[0] as HTMLElement;
+            btn.addEventListener(`click`, () => {
+              window.location.reload();
+            });
           }
-          options.sides.load.style.display = await `none`;
-          options.sides.input.style.display = await `block`;
 
-          // step 2 active
-          steps.step_2.line.style.backgroundColor = `#232635`;
-          steps.step_2.circle.style.backgroundColor = `#232635`;
-          steps.step_2.circle.style.color = `#fff`;
         }
-        options.countrys.input.addEventListener(`input`,get_sides)
+        options.countrys.input.addEventListener(`input`,get_sides);
 
         // get citys function
         async function get_citys() {
-          
-          // step 3
-          steps.step_3.line.style.backgroundColor = await `#fff`;
-          steps.step_3.circle.style.backgroundColor = await `#fff`;
-          steps.step_3.circle.style.color = await `#232635`;
 
-          // display button submit
-          submit_button.style.display = await `none`;
+          try {
 
-          // data entry user
-          data_user.side = await options.sides.input.value;
-          data_user.city = await ``;
-          await localStorage.setItem(`side`, `${options.sides.input.value}`);
+            // step 3
+            steps.step_3.line.style.backgroundColor = await `#fff`;
+            steps.step_3.circle.style.backgroundColor = await `#fff`;
+            steps.step_3.circle.style.color = await `#232635`;
 
-          // load citys
-          options.citys.load.style.display = await `flex`;
-          options.citys.input.style.display = await `none`;
+            // display button submit
+            submit_button.style.display = await `none`;
 
-          // get citys
-          let get_citys = await fetch(`https://www.universal-tutorial.com/api/cities/${data_user.side}`, {
-            headers: {
-              "Authorization": "Bearer " + token.auth_token,
-              "Accept": "application/json"
+            // data entry user
+            data_user.side = await options.sides.input.value;
+            data_user.city = await ``;
+            await localStorage.setItem(`side`, `${options.sides.input.value}`);
+
+            // load citys
+            options.citys.load.style.display = await `flex`;
+            options.citys.input.style.display = await `none`;
+            
+            // get citys
+            let get_citys = await fetch(`https://www.universal-tutorial.com/api/cities/${data_user.side}`, {
+              headers: {
+                "Authorization": "Bearer " + token.auth_token,
+                "Accept": "application/json"
+              }
+            })
+            let citys_data = await get_citys.json();
+            
+            // display sides_data
+            options.citys.input.innerHTML = await `<option>select city</option>`;
+            for (let i = 0; i <citys_data.length; i++) {
+              options.citys.input.innerHTML += await `<option value="${citys_data[i].city_name}">${citys_data[i].city_name}</option>`;
             }
-          })
-          let citys_data = await get_citys.json();
-          
-          // display sides_data
-          options.citys.input.innerHTML = await `<option>select city</option>`;
-          for (let i = 0; i <citys_data.length; i++) {
-            options.citys.input.innerHTML += await `<option value="${citys_data[i].city_name}">${citys_data[i].city_name}</option>`;
-          }
-          options.citys.load.style.display = await `none`;
-          options.citys.input.style.display = await `block`;
+            options.citys.load.style.display = await `none`;
+            options.citys.input.style.display = await `block`;
 
-          // step 2 active
-          steps.step_3.line.style.backgroundColor = await `#232635`;
-          steps.step_3.circle.style.backgroundColor = await `#232635`;
-          steps.step_3.circle.style.color = await `#fff`;
+            // step 2 active
+            steps.step_3.line.style.backgroundColor = await `#232635`;
+            steps.step_3.circle.style.backgroundColor = await `#232635`;
+            steps.step_3.circle.style.color = await `#fff`;
+
+          } catch (error) {
+            components.conntent.innerHTML = components.error;
+            console.log(
+              error
+            );
+            let btn = document.querySelectorAll(`.error button`)[0] as HTMLElement;
+            btn.addEventListener(`click`, () => {
+              window.location.reload();
+            });
+          }
 
         }
         options.sides.input.addEventListener(`input`,get_citys);
@@ -353,147 +380,170 @@ async function set_location() {
       console.log(
         error
       );
+      let btn = document.querySelectorAll(`.error button`)[0] as HTMLElement;
+      btn.addEventListener(`click`, () => {
+        window.location.reload();
+      });
     }
 
-}
+};
 
 // diplay prayer timing function
 async function display_prayer_timin(countrie: string, city: string) {
 
-  // prayer timing data
-  let date = await new Date(),
-    year = date.getFullYear(),
-    month = date.getMonth(),
-    day = date.getDate();
-  let address = await {
-    country: countrie,
-    city: city,
-  }
-  let method = 4;
-  
-  // diplay load
-  components.conntent.innerHTML = await components.load;
+  try {
 
-  // get prayer timing
-  let url = await `http://api.aladhan.com/v1/calendarByAddress?address=${address.city},${address.country}&method=${method}&month=${month}&year=${year}`;
-  let get_prayer_timing = await fetch(url);
-  let prayer_tiling_date = await get_prayer_timing.json();
-  
-  // diplay prayer timing
-  components.conntent.innerHTML = await components.prayer_timing;
-
-  // data timi
-  let date_time = await {
-    month: document.getElementById(`month`) as HTMLElement,
-    day: document.getElementById(`day`) as HTMLElement,
-    year: document.getElementById(`year`) as HTMLElement,
-    city: document.getElementById(`city`) as HTMLElement,
-    country: document.getElementById(`country`) as HTMLElement,
-    date_timing: () => {
-
-      date_time.month.innerHTML = `${month + 1}`;
-      date_time.day.innerHTML = `${day}`;
-      date_time.year.innerHTML = `${year}`;
-
-      date_time.city.innerHTML = `${address.city}`;
-      date_time.country.innerHTML = `${address.country}`;            
+    // prayer timing data
+    let date = await new Date(),
+      year = date.getFullYear(),
+      month = date.getMonth(),
+      day = date.getDate();
+    let address = await {
+      country: countrie,
+      city: city,
     }
-  }
-  await date_time.date_timing();
+    let method = 4;
+    
+    // diplay load
+    components.conntent.innerHTML = await components.load;
 
-  // display prayer timing data
-  let prayer_timing_el = await {
-    fajr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[0] as HTMLElement,
-    sunrise: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[1] as HTMLElement,
-    dhuhr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[2] as HTMLElement,
-    asr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[3] as HTMLElement,
-    maghrib: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[4] as HTMLElement,
-    isha: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[5] as HTMLElement,
-    number_index: day - 1,
-  }
-  prayer_timing_el.fajr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-  prayer_timing_el.sunrise.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-  prayer_timing_el.dhuhr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-  prayer_timing_el.asr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-  prayer_timing_el.maghrib.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-  prayer_timing_el.isha.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
+    // get prayer timing
+    let url = await `http://api.aladhan.com/v1/calendarByAddress?address=${address.city},${address.country}&method=${method}&month=${month}&year=${year}`;
+    let get_prayer_timing = await fetch(url);
+    let prayer_tiling_date = await get_prayer_timing.json();
+    
+    // diplay prayer timing
+    components.conntent.innerHTML = await components.prayer_timing;
 
-  // switch prayer timing
-  let btns = {
-    right: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .right`)[0] as HTMLElement,
-    left: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .left`)[0] as HTMLElement,
-  }
+    // data timi
+    let date_time = await {
+      month: document.getElementById(`month`) as HTMLElement,
+      day: document.getElementById(`day`) as HTMLElement,
+      year: document.getElementById(`year`) as HTMLElement,
+      city: document.getElementById(`city`) as HTMLElement,
+      country: document.getElementById(`country`) as HTMLElement,
+      date_timing: () => {
 
-  // right
-  btns.right.addEventListener(`click`, () => {
+        date_time.month.innerHTML = `${month + 1}`;
+        date_time.day.innerHTML = `${day}`;
+        date_time.year.innerHTML = `${year}`;
 
-    let max = prayer_tiling_date.data.length -1;
-    if (prayer_timing_el.number_index < max) {
-      prayer_timing_el.number_index += 1;
+        date_time.city.innerHTML = `${address.city}`;
+        date_time.country.innerHTML = `${address.country}`;            
+      }
+    }
+    await date_time.date_timing();
 
-      prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-      prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-      prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-      prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-      prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-      prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
+    // display prayer timing data
+    let prayer_timing_el = await {
+      fajr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[0] as HTMLElement,
+      sunrise: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[1] as HTMLElement,
+      dhuhr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[2] as HTMLElement,
+      asr: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[3] as HTMLElement,
+      maghrib: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[4] as HTMLElement,
+      isha: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn ul li`)[5] as HTMLElement,
+      number_index: day - 1,
+    }
+    prayer_timing_el.fajr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
+    prayer_timing_el.sunrise.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
+    prayer_timing_el.dhuhr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
+    prayer_timing_el.asr.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
+    prayer_timing_el.maghrib.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
+    prayer_timing_el.isha.children[1].innerHTML = await prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
 
-      date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
-
+    // switch prayer timing
+    let btns = {
+      right: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .right`)[0] as HTMLElement,
+      left: document.querySelectorAll(`.contents .prayer_timings .prayer .ctn .left`)[0] as HTMLElement,
     }
 
-  })
+    // left
+    btns.left.addEventListener(`click`, () => {
 
-  // left
-  btns.left.addEventListener(`click`, () => {
+      let max = prayer_tiling_date.data.length -1;
+      if (prayer_timing_el.number_index < max) {
+        prayer_timing_el.number_index += 1;
 
-    let min = 0;
-    if (prayer_timing_el.number_index > min) {
-      prayer_timing_el.number_index -= 1;
+        prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
+        prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
+        prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
+        prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
+        prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
+        prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
 
-      prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
-      prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
-      prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
-      prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
-      prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
-      prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
+        date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
 
-      date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
+      }
 
-    }
+    })
 
-  })
+    // right
+    btns.right.addEventListener(`click`, () => {
 
-  await edite_prayer_timing();
+      let min = 0;
+      if (prayer_timing_el.number_index > min) {
+        prayer_timing_el.number_index -= 1;
 
+        prayer_timing_el.fajr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Fajr;
+        prayer_timing_el.sunrise.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Sunrise;
+        prayer_timing_el.dhuhr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Dhuhr;
+        prayer_timing_el.asr.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Asr;
+        prayer_timing_el.maghrib.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Maghrib;
+        prayer_timing_el.isha.children[1].innerHTML = prayer_tiling_date.data[prayer_timing_el.number_index].timings.Isha;
 
+        date_time.day.innerHTML = `${prayer_timing_el.number_index + 1}`;
 
-}
+      }
 
-// edite_prayer_timing
+    })
+
+    await edite_prayer_timing();
+
+  } catch (error) {
+      components.conntent.innerHTML = components.error;
+      console.log(
+        error
+      );
+      let btn = document.querySelectorAll(`.error button`)[0] as HTMLElement;
+      btn.addEventListener(`click`, () => {
+        window.location.reload();
+      });
+  }
+
+};
+
+// edite_prayer_timing function
 function edite_prayer_timing() {
 
-  let open_clos = {
+  let edite_prayer_timing_el = {
     btn: document.querySelectorAll(`.contents .prayer_timings .date .ctn button`)[0] as HTMLElement,
     edite_location_time: document.querySelectorAll(`.prayer_timings .edite_location_time`)[0] as HTMLElement,
     plack_black: document.querySelectorAll(`.prayer_timings .plack_black`)[0] as HTMLElement,
     x: document.querySelectorAll(`.prayer_timings .edite_location_time .btn_x i`)[0] as HTMLElement,
+    btn_edite: document.querySelectorAll(`.prayer_timings .edite_location_time .tabs .tab button`)[0] as HTMLElement,
   }
-  open_clos.btn.addEventListener(`click`, () => {
+  edite_prayer_timing_el.btn.addEventListener(`click`, () => {
 
-    open_clos.edite_location_time.style.transform = `translateX(0%)`;
-    open_clos.plack_black.style.zIndex = `100`;
-    open_clos.x.addEventListener(`click`, () => {
-      open_clos.edite_location_time.style.transform = `translateX(100%)`;
-      open_clos.plack_black.style.zIndex = `-1`;                
+    edite_prayer_timing_el.edite_location_time.style.transform = `translateX(0%)`;
+    edite_prayer_timing_el.plack_black.style.zIndex = `100`;
+
+    edite_prayer_timing_el.x.addEventListener(`click`, () => {
+      edite_prayer_timing_el.edite_location_time.style.transform = `translateX(100%)`;
+      edite_prayer_timing_el.plack_black.style.zIndex = `-1`;
     })
-    open_clos.plack_black.addEventListener(`click`, () => {
-      open_clos.edite_location_time.style.transform = `translateX(100%)`;
-      open_clos.plack_black.style.zIndex = `-1`;                
+
+    edite_prayer_timing_el.plack_black.addEventListener(`click`, () => {
+      edite_prayer_timing_el.edite_location_time.style.transform = `translateX(100%)`;
+      edite_prayer_timing_el.plack_black.style.zIndex = `-1`;
+    })
+
+    edite_prayer_timing_el.btn_edite.addEventListener(`click`, () => {
+      localStorage.clear()
+      set_location()
     })
   })
 
-}
+};
 
 // prayer_tiling function
 function prayer_tiling() {
@@ -503,5 +553,3 @@ function prayer_tiling() {
 
 }
 prayer_tiling();
-
-// localStorage.clear()
