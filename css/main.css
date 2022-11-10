@@ -1,6 +1,3 @@
-/* :root {
-
-} */
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -513,3 +510,48 @@ button {
 /* prayer timings */
 
 /* contents */
+
+
+
+
+
+
+/* footer */
+.footer-page {
+  padding: 40px 0px 60px;
+  background-color:#373747;
+  border-top: 1px solid rgba(255, 255, 255, 0.459);
+}
+.footer-page .logo .ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 15px;
+}
+.footer-page .logo .ctn h1 {
+  text-transform: uppercase;
+  font-weight: 400;  
+  color: #fff;
+}
+.footer-page .i-t .ctn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.i-t .ctn .reso {
+  display: flex;
+  margin-bottom: 20px;
+}
+.footer-page .i-t .ctn .reso a {
+  padding: 0px 6px;
+}
+.footer-page .i-t .ctn .reso a i {
+  font-size: 18px;
+  color: #fff;
+  transition: all 0.1s;
+}
+.footer-page .i-t .ctn  .reso a i:hover {
+  transform: scale(1.4);
+  cursor: pointer;
+}
+/* footer */
